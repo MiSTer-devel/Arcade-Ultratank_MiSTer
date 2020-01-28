@@ -222,7 +222,7 @@ JoyZ_Bk             |        |                |    x    |               |   x   
 reg JoyW_Fw,JoyW_Bk,JoyX_Fw,JoyX_Bk;
 reg JoyY_Fw,JoyY_Bk,JoyZ_Fw,JoyZ_Bk;
 always @(posedge clk_sys) begin 
-	case ({btn_up,m_down,m_left,m_right}) // Up,down,Left,Right
+	case ({m_up,m_down,m_left,m_right}) // Up,down,Left,Right
 		4'b1010: begin JoyW_Fw=0; JoyW_Bk=0; JoyX_Fw=1; JoyX_Bk=0; end //Up_Left
 		4'b1000: begin JoyW_Fw=1; JoyW_Bk=0; JoyX_Fw=1; JoyX_Bk=0; end //Up
 		4'b1001: begin JoyW_Fw=1; JoyW_Bk=0; JoyX_Fw=0; JoyX_Bk=0; end //Up_Right
