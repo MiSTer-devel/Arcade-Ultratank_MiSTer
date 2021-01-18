@@ -119,7 +119,6 @@ assign VIDEO_ARY =  (!ar) ? ( 8'd3) : 12'd0;
 localparam CONF_STR = {
 	"A.ULTRATNK;;",
 	"H0O12,Aspect ratio,Original,Full Screen,[ARC1],[ARC2];",
-	"O1,Aspect Ratio,Original,Wide;",
 	"O35,Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;",  
 	"-;",
 	"O89,Extended Play,none,25pts,50pts,75pts;",
