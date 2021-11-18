@@ -16,4 +16,4 @@ set_global_assignment -name VHDL_FILE rtl/cpu_mem.vhd
 set_global_assignment -name VHDL_FILE rtl/collision.vhd
 set_global_assignment -name VHDL_FILE rtl/dpram.vhd
 set_global_assignment -name VHDL_FILE rtl/spram.vhd
-
+set_global_assignment -name VERILOG_FILE rtl/video_resync.v

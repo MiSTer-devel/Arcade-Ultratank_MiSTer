@@ -114,12 +114,17 @@ wire [1:0] ar = status[2:1];
 assign VIDEO_ARX =  (!ar) ? ( 8'd4) : (ar - 1'd1);
 assign VIDEO_ARY =  (!ar) ? ( 8'd3) : 12'd0;
 
+//00000000001111111111222222222233
+//01234567890123456789012345678901
+//0123456789ABCDEFGHIJKLMNOPQRSTUV
 
 `include "build_id.v"
 localparam CONF_STR = {
 	"A.ULTRATNK;;",
 	"H0O12,Aspect ratio,Original,Full Screen,[ARC1],[ARC2];",
-	"O35,Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;",  
+	"O35,Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;", 
+	"OHK,Analog Video H-Pos,0,-1,-2,-3,-4,-5,-6,-7,8,7,6,5,4,3,2,1;",
+	"OLO,Analog Video V-Pos,0,-1,-2,-3,-4,-5,-6,-7,8,7,6,5,4,3,2,1;",	
 	"-;",
 	"O89,Extended Play,none,25pts,50pts,75pts;",
 	"OAB,Game time,150 Sec,120 Sec,90 Sec,60 Sec;",
@@ -333,10 +338,28 @@ arcade_video #(320,9) arcade_video
         .RGB_in({r,g,b}),
         .HBlank(hblank),
         .VBlank(vblank),
-        .HSync(hs),
-        .VSync(vs),
+        .HSync(hs_rs),
+        .VSync(vs_rs),
 
         .fx(status[5:3])
+);
+
+wire hs_rs, vs_rs;
+wire [3:0]  hoffset = status[20:17];
+wire [3:0]  voffset = status[24:21];
+
+video_resync video_resync
+(
+  .clk(clk_sys),
+  .pxl_cen(ce_pix),
+  .hs_in(hs),
+  .vs_in(vs),
+  .LVBL(vblank),
+  .LHBL(hblank),
+  .hoffset(hoffset),
+  .voffset(voffset),
+  .hs_out(hs_rs),
+  .vs_out(vs_rs)
 );
 
 pll pll (
